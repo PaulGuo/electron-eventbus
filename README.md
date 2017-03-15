@@ -2,7 +2,10 @@
 
 ```
 EventBus.on
+EventBus.once
 EventBus.emit
+EventBus.send
+EventBus.sendSync
 EventBus.broadcast
 ```
 

@@ -1,0 +1,105 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/paulguo/.nvm/versions/node/v4.4.6/bin/node',
+1 verbose cli   '/Users/paulguo/.nvm/versions/node/v4.4.6/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@2.15.5
+3 info using node@v4.4.6
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/paulguo/Develop/electron-eventbus',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/paulguo/.npm/electron-eventbus/1.0.1/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/paulguo/.npm correctMkdir not in flight; initializing
+10 verbose tar pack [ '/Users/paulguo/.npm/electron-eventbus/1.0.1/package.tgz',
+10 verbose tar pack   '/Users/paulguo/Develop/electron-eventbus' ]
+11 verbose tarball /Users/paulguo/.npm/electron-eventbus/1.0.1/package.tgz
+12 verbose folder /Users/paulguo/Develop/electron-eventbus
+13 info prepublish electron-eventbus@1.0.1
+14 verbose addLocalTarball adding from inside cache /Users/paulguo/.npm/electron-eventbus/1.0.1/package.tgz
+15 verbose correctMkdir /Users/paulguo/.npm correctMkdir not in flight; initializing
+16 silly cache afterAdd electron-eventbus@1.0.1
+17 verbose afterAdd /Users/paulguo/.npm/electron-eventbus/1.0.1/package/package.json not in flight; writing
+18 verbose correctMkdir /Users/paulguo/.npm correctMkdir not in flight; initializing
+19 verbose afterAdd /Users/paulguo/.npm/electron-eventbus/1.0.1/package/package.json written
+20 silly publish { name: 'electron-eventbus',
+20 silly publish   version: '1.0.1',
+20 silly publish   description: 'electron-eventbus',
+20 silly publish   main: 'index.js',
+20 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+20 silly publish   repository:
+20 silly publish    { type: 'git',
+20 silly publish      url: 'git+https://github.com/PaulGuo/electron-eventbus.git' },
+20 silly publish   keywords: [ 'electron', 'eventbus' ],
+20 silly publish   author: { name: 'PaulGuo' },
+20 silly publish   license: 'ISC',
+20 silly publish   bugs: { url: 'https://github.com/PaulGuo/electron-eventbus/issues' },
+20 silly publish   homepage: 'https://github.com/PaulGuo/electron-eventbus#readme',
+20 silly publish   readme: '# Electron-EventBus\n\n```\nEventBus.on\nEventBus.emit\nEventBus.broadcast\n```\n\n## 使用示例\n\n```\nconst XtremeEventBus = new EventBus();\n\nXtremeEventBus.on(\'componentManagment:componentSelected\', () => {\n    console.log(\'componentSelected occurred!\');\n});\n\nXtremeEventBus.emit(\'event\');\nXtremeEventBus.broadcast(\'event\');\n```\n',
+20 silly publish   readmeFilename: 'README.md',
+20 silly publish   gitHead: '9c46bee7f1d2aa87175e4ea664f3678bed5ad3d4',
+20 silly publish   _id: 'electron-eventbus@1.0.1',
+20 silly publish   _shasum: '1e1eb17d5f6f6d1d756a5b1a904ef8800ac01ebb',
+20 silly publish   _from: '.' }
+21 verbose getPublishConfig undefined
+22 silly mapToRegistry name electron-eventbus
+23 silly mapToRegistry using default registry
+24 silly mapToRegistry registry https://registry.npmjs.org/
+25 silly mapToRegistry data Result {
+25 silly mapToRegistry   raw: 'electron-eventbus',
+25 silly mapToRegistry   scope: null,
+25 silly mapToRegistry   name: 'electron-eventbus',
+25 silly mapToRegistry   rawSpec: '',
+25 silly mapToRegistry   spec: 'latest',
+25 silly mapToRegistry   type: 'tag' }
+26 silly mapToRegistry uri https://registry.npmjs.org/electron-eventbus
+27 verbose publish registryBase https://registry.npmjs.org/
+28 silly publish uploading /Users/paulguo/.npm/electron-eventbus/1.0.1/package.tgz
+29 verbose request uri https://registry.npmjs.org/electron-eventbus
+30 verbose request sending authorization for write operation
+31 info attempt registry request try #1 at 01:22:09
+32 verbose request id 1f1d3bb493254046
+33 http request PUT https://registry.npmjs.org/electron-eventbus
+34 http 403 https://registry.npmjs.org/electron-eventbus
+35 verbose headers { 'content-type': 'application/json',
+35 verbose headers   'cache-control': 'max-age=300',
+35 verbose headers   'content-length': '95',
+35 verbose headers   'accept-ranges': 'bytes',
+35 verbose headers   date: 'Wed, 15 Mar 2017 17:22:08 GMT',
+35 verbose headers   via: '1.1 varnish',
+35 verbose headers   connection: 'keep-alive',
+35 verbose headers   'x-served-by': 'cache-nrt6135-NRT',
+35 verbose headers   'x-cache': 'MISS',
+35 verbose headers   'x-cache-hits': '0',
+35 verbose headers   'x-timer': 'S1489598527.482454,VS0,VE582',
+35 verbose headers   vary: 'Accept-Encoding' }
+36 verbose request invalidating /Users/paulguo/.npm/registry.npmjs.org/electron-eventbus on PUT
+37 error publish Failed PUT 403
+38 verbose stack Error: "You cannot publish over the previously published version 1.0.1." : electron-eventbus
+38 verbose stack     at makeError (/Users/paulguo/.nvm/versions/node/v4.4.6/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+38 verbose stack     at CachingRegistryClient.<anonymous> (/Users/paulguo/.nvm/versions/node/v4.4.6/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+38 verbose stack     at Request._callback (/Users/paulguo/.nvm/versions/node/v4.4.6/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+38 verbose stack     at Request.self.callback (/Users/paulguo/.nvm/versions/node/v4.4.6/lib/node_modules/npm/node_modules/request/request.js:200:22)
+38 verbose stack     at emitTwo (events.js:87:13)
+38 verbose stack     at Request.emit (events.js:172:7)
+38 verbose stack     at Request.<anonymous> (/Users/paulguo/.nvm/versions/node/v4.4.6/lib/node_modules/npm/node_modules/request/request.js:1067:10)
+38 verbose stack     at emitOne (events.js:82:20)
+38 verbose stack     at Request.emit (events.js:169:7)
+38 verbose stack     at IncomingMessage.<anonymous> (/Users/paulguo/.nvm/versions/node/v4.4.6/lib/node_modules/npm/node_modules/request/request.js:988:12)
+39 verbose statusCode 403
+40 verbose pkgid electron-eventbus
+41 verbose cwd /Users/paulguo/Develop/electron-eventbus
+42 error Darwin 16.5.0
+43 error argv "/Users/paulguo/.nvm/versions/node/v4.4.6/bin/node" "/Users/paulguo/.nvm/versions/node/v4.4.6/bin/npm" "publish"
+44 error node v4.4.6
+45 error npm  v2.15.5
+46 error code E403
+47 error "You cannot publish over the previously published version 1.0.1." : electron-eventbus
+48 error If you need help, you may report this error at:
+48 error     <https://github.com/npm/npm/issues>
+49 verbose exit [ 1, true ]
