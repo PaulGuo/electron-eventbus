@@ -38,13 +38,13 @@ function isRenderer () {
 }
 
 class EventBus extends EventEmitter {
-    constructor(name = 'default') {
+    constructor (name = 'default') {
         super(); //must call super for "this" to be defined.
         this._channelName = name;
-        this._baseEventKey = `EventBus-${name}:`;
+        this._baseEventKey = `Electron-EventBus-${name}:`;
     }
 
-    on(event, listender) {
+    on (event, listender) {
         const ipc = isRenderer() ? electron.ipcRenderer : electron.ipcMain;
 
         if (Array.isArray(event)) {
@@ -54,21 +54,63 @@ class EventBus extends EventEmitter {
 
         ipc.on(this._baseEventKey + event, (e, argsJson) => {
             const args = JSON.parse(argsJson);
-            return listender && listender(...args);
+            return listender && listender(e, ...args);
         });
 
         return super.on(event, listender);
     }
 
-    emit(event, ...args) {
+    once (event, listender) {
         const ipc = isRenderer() ? electron.ipcRenderer : electron.ipcMain;
 
-        if (isRenderer()) {
-            this.broadcast(event, args);
+        if (Array.isArray(event)) {
+            event.forEach(e => this.once(e, listender));
+            return;
         }
+
+        ipc.once(this._baseEventKey + event, (e, argsJson) => {
+            const args = JSON.parse(argsJson);
+            return listender && listender(e, ...args);
+        });
+
+        return super.once(event, listender);
     }
 
-    broadcast(event, ...args) {
+    emit (event, ...args) {
+        const ipcRenderer = electron.ipcRenderer;
+        const ipcArgs = [this._baseEventKey + event, JSON.stringify(Array.from(args))];
+
+        if (!isRenderer()) {
+            return this.broadcast(event, args);
+        }
+
+        ipcRenderer.send(...ipcArgs);
+        return super.emit(event, ...args);
+    }
+
+    send (event, ...args) {
+        const ipcRenderer = electron.ipcRenderer;
+        const ipcArgs = [this._baseEventKey + event, JSON.stringify(Array.from(args))];
+
+        if (!isRenderer()) {
+            return;
+        }
+
+        return ipcRenderer.send(...ipcArgs);
+    }
+
+    sendSync (event, ...args) {
+        const ipcRenderer = electron.ipcRenderer;
+        const ipcArgs = [this._baseEventKey + event, JSON.stringify(Array.from(args))];
+
+        if (!isRenderer()) {
+            return;
+        }
+
+        return ipcRenderer.sendSync(...ipcArgs);
+    }
+
+    broadcast (event, ...args) {
         const mainProcess = isRenderer() ? electron.remote : electron;
         const webContents = mainProcess.webContents;
         const ipcRenderer = electron.ipcRenderer;
@@ -81,7 +123,8 @@ class EventBus extends EventEmitter {
             allContents
                 .filter(contents => contents.id !== curContents.id)
                 .forEach(contents => contents.send(...ipcArgs));
-            ipcRenderer.send();
+
+            ipcRenderer.send(...ipcArgs);
         } else { // main process
             allContents
                 .forEach(contents => contents.send(...ipcArgs));
